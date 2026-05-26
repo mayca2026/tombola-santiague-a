@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiniela Santiago - Analizador</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Tómbola de Santiago del Estero</p>
+        <h1>Analizador de números</h1>
+        <p class="intro">Cargá resultados, mezclá preguntas y armá jugadas con los números que más se cruzan.</p>
+      </div>
+      <div class="quick-check">
+        <div class="status" id="status">Listo</div>
+        <h2>Consultar mi número</h2>
+        <div class="quick-grid">
+          <label>Número <input id="checkNumber" inputmode="numeric" maxlength="4" placeholder="4, 3 o 2 cifras"></label>
+          <label>Desde <input id="checkFrom" type="date"></label>
+          <label>Hasta <input id="checkTo" type="date"></label>
+        </div>
+        <button id="checkBtn" class="secondary">Ver si salió</button>
+        <div id="checkResult" class="check-result">Ingresá 4 cifras, o las últimas 3 / 2 para buscar coincidencias.</div>
+      </div>
+      <button id="witchCard" class="witch-card" type="button" aria-label="Número de la suerte">
+        <img src="/bruja-suerte.png" alt="Bruja de la suerte">
+        <span id="luckyNumber" class="lucky-number">--</span>
+      </button>
+    </header>
+
+    <section class="hero-strip" aria-label="Resumen visual">
+      <div class="hero-card hot">
+        <span>Semana</span>
+        <strong id="weekTop">--</strong>
+        <small id="weekTopLabel">Frecuentes</small>
+      </div>
+      <div class="hero-card cool">
+        <span>Mes</span>
+        <strong id="monthTop">--</strong>
+        <small id="monthTopLabel">Repetidos</small>
+      </div>
+      <div class="hero-card gold">
+        <span>Hoy</span>
+        <strong id="todayTop">--</strong>
+        <small id="todayTopLabel">Coincidencias</small>
+      </div>
+    </section>
+
+    <section class="dream-panel">
+      <div class="dream-copy">
+        <p class="eyebrow">Números de los sueños</p>
+        <h2>¿Qué soñaste?</h2>
+        <div class="dream-search">
+          <input id="dreamInput" type="text" placeholder="Ej: agua, caballo, dinero">
+          <button id="dreamBtn" type="button">Buscar número</button>
+        </div>
+        <div id="dreamResult" class="dream-result">Escribí una palabra del sueño y te digo el número.</div>
+      </div>
+      <button id="dreamPosterBtn" class="dream-poster" type="button" aria-label="Ver afiche de números de los sueños">
+        <img src="/numeros-suenos.gif" alt="Números de los sueños">
+      </button>
+    </section>
+
+    <section class="panel controls">
+      <div class="group">
+        <h2>Traer resultados</h2>
+        <div class="row">
+          <label>Desde <input id="fromDate" type="date"></label>
+          <label>Hasta <input id="toDate" type="date"></label>
+          <button id="importBtn">Importar fechas</button>
+          <button id="officialBtn" class="official">Importar oficial de hoy</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>Carga manual</h2>
+        <form id="manualForm" class="row">
+          <label>Fecha <input id="manualDate" type="date" required></label>
+          <label>Turno
+            <select id="manualTurn">
+              <option>Previa</option>
+              <option>Primera</option>
+              <option>Matutina</option>
+              <option>Vespertina</option>
+              <option>Tarde</option>
+              <option>Nocturna</option>
+            </select>
+          </label>
+          <label>Puesto <input id="manualPosition" type="number" min="1" max="20" value="1"></label>
+          <label>Número <input id="manualNumber" inputmode="numeric" maxlength="4" placeholder="0000" required></label>
+          <button>Guardar</button>
+        </form>
+        <div class="paste-import">
+          <label>Texto del extracto oficial
+            <textarea id="officialText" placeholder="Pegá aquí el texto leído de la imagen: Tómbola Santiagueña Previa, fecha, puestos y números..."></textarea>
+          </label>
+          <button id="pasteBtn" type="button" class="official">Cargar texto oficial</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <aside class="panel filters">
+        <h2>Preguntas</h2>
+        <label>Rango
+          <select id="rangeFilter">
+            <option value="all">Todo lo cargado</option>
+            <option value="week">Esta semana</option>
+            <option value="month">Este mes</option>
+            <option value="lastMonth">Mes pasado</option>
+            <option value="year">Este año</option>
+          </select>
+        </label>
+        <label>Turno
+          <select id="turnFilter">
+            <option value="all">Todos</option>
+            <option>Previa</option>
+            <option>Primera</option>
+            <option>Matutina</option>
+            <option>Vespertina</option>
+            <option>Tarde</option>
+            <option>Nocturna</option>
+          </select>
+        </label>
+        <label>Día
+          <select id="dayFilter">
+            <option value="all">Todos</option>
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="0">Domingo</option>
+          </select>
+        </label>
+        <label>Puestos
+          <select id="positionFilter">
+            <option value="all">Todos los puestos</option>
+            <option value="head">Solo cabeza</option>
+          </select>
+        </label>
+        <button id="comboBtn" class="secondary">Armar jugada</button>
+      </aside>
+
+      <section class="panel results">
+        <div class="section-title">
+          <h2>Números más repetidos</h2>
+          <span id="countLabel">0 resultados</span>
+        </div>
+        <div id="ranking" class="ranking"></div>
+      </section>
+
+      <section class="panel picks">
+        <div class="section-title">
+          <h2>Jugada sugerida</h2>
+          <span>por coincidencias</span>
+        </div>
+        <div id="combo" class="combo"></div>
+      </section>
+    </section>
+
+    <section class="draw-board">
+      <div class="board-head">
+        <button id="prevDayBtn" class="arrow-btn" type="button" aria-label="Día anterior">‹</button>
+        <div>
+          <p class="eyebrow">Extractos por día</p>
+          <h2 id="boardDate">Sin fecha</h2>
+        </div>
+        <button id="nextDayBtn" class="arrow-btn" type="button" aria-label="Día siguiente">›</button>
+      </div>
+      <div id="drawCards" class="draw-cards"></div>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
